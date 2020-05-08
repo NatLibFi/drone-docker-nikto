@@ -17,13 +17,13 @@ steps:
 - name: Test
   image: busybox
   commands:
-  - ls -l
-  - pwd
+  - ls -l repo
   
 - name: Build Docker image
   image: plugins/docker
   settings:
     context: repo
+    dockerfile: repo/Dockerfile
     repo: quay.io/natlibfi/nikto
     registry: quay.io
     username:
