@@ -6,19 +6,17 @@ clone:
   disable: true
 
 steps:
-- name: generate-tags
+- name: Generate Docker tags
   image: quay.io/natlibfi/drone-gen-tags
 
 - name: Clone upstream
   image: alpine/git
   commands:
-  - git clone https://github.com/sullo/nikto
-  - cd nikto
-  - git checkout master
-  
+  - git clone -b master https://github.com/sullo/nikto repo    
 - name: Build Docker image
   image: plugins/docker
   settings:
+    context: repo
     repo: quay.io/natlibfi/nikto
     registry: quay.io
     username:
