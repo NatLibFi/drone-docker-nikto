@@ -16,7 +16,7 @@ steps:
 - name: Build Docker image
   image: plugins/docker
   settings:
-    context: repo
+    context: /drone/src/repo
     repo: quay.io/natlibfi/nikto
     registry: quay.io
     username:
