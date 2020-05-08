@@ -1,0 +1,36 @@
+kind: pipeline
+type: docker
+name: default
+
+clone:
+  disable: true
+
+steps:
+- name: generate-tags
+  image: quay.io/natlibfi/drone-gen-tags
+
+- name: Clone upstream
+  image: alpine/git
+  commands:
+  - git clone https://github.com/sullo/nikto
+  - cd nikto
+  - git checkout master
+  
+- name: Build Docker image
+  image: plugins/docker
+  settings:
+    repo: quay.io/natlibfi/nikto
+    registry: quay.io
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+      
+---
+kind: secret
+name: docker_username
+data: qxTEf5lJjiv3RZo+5WcwrqJlo5nm9E6RvTIjVPc1QfTpb1soYuL6Rz3D27PrvJoeEto=
+---
+kind: secret
+name: docker_password
+data: J2IZXP9Pd+xDWVICw32bW5xIbC/ypUp/j5y6IpZ+8S303uRxA5hjVqHiYg5u68y9JMpEGMv4cekwylnzPGmZ/pk4oocPSHb7uOkUneFOz+Xs9g2+6ShBwJRSz1U=
