@@ -13,10 +13,17 @@ steps:
   image: alpine/git
   commands:
   - git clone -b master https://github.com/sullo/nikto repo    
+  
+- name: Test
+  image: busybox
+  commands:
+  - ls -l
+  - pwd
+  
 - name: Build Docker image
   image: plugins/docker
   settings:
-    context: /drone/src/repo
+    context: repo
     repo: quay.io/natlibfi/nikto
     registry: quay.io
     username:
