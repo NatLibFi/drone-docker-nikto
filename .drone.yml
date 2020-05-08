@@ -12,12 +12,7 @@ steps:
 - name: Clone upstream
   image: alpine/git
   commands:
-  - git clone -b master https://github.com/sullo/nikto repo    
-  
-- name: Test
-  image: busybox
-  commands:
-  - ls -l repo
+  - git clone -b master https://github.com/sullo/nikto repo
   
 - name: Build Docker image
   image: plugins/docker
